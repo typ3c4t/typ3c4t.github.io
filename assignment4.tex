@@ -1,0 +1,183 @@
+\documentclass{amsart}
+
+%\usepackage{etex}
+%\usepackage{graphicx}
+%\usepackage{amsfonts}
+%\usepackage[usenames,dvipsnames]{xcolor}
+%\usepackage[bookmarks=true,colorlinks=true, linkcolor=RoyalBlue, citecolor=magenta]{hyperref}
+\usepackage{subfig}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{cmll}
+\usepackage{url}
+\usepackage{bbm}
+\usepackage{stmaryrd}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{bussproofs}
+\usepackage{enumerate}
+
+%Theorem Environments%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+
+\theoremstyle{definition}
+\newtheorem{dfn}[thm]{Definition}
+\newtheorem*{notation*}{Notation}
+
+\theoremstyle{definition}
+\newtheorem{ex}[thm]{Example}
+
+%Definitions%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\List}{List}
+\DeclareMathOperator{\irr}{Irr}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\gal}{Gal}
+\DeclareMathOperator{\tr}{Tr}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\colim}{colim}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\spa}{span}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\mat}{Mat}
+
+
+\def\taking{\colon}
+\def\ot{\leftarrow}
+\def\too{\longrightarrow}
+\def\inj{\hookrightarrow}
+\newcommand{\an}[1]{\langle #1 \rangle}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\def\rla{\rightleftharpoons}
+\newcommand{\To}[1]{\xrightarrow{#1}}
+\newcommand{\From}[1]{\xleftarrow{#1}}
+\def\ss{\subseteq}
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\Id}[1]{\mathbbm{1}_{#1}}
+\def\then{\sslash}
+
+\def\op{^{\text{op}}}
+\def\Set{\mathbf{Set}}
+\def\Rel{\mathbf{Rel}}
+\def\Fin{\mathbf{Fin}}
+\def\Vect{\mathbf{Vect}}
+\def\Pos{\mathbf{Pos}}
+\def\Pre{\mathbf{Pre}}
+\def\Tot{\mathbf{Tot}}
+\def\Mon{\mathbf{Mon}}
+\def\Com{\mathbf{Com}}
+\def\Grp{\mathbf{Grp}}
+\def\Cat{\mathbf{Cat}}
+\def\mcC{\mathcal{C}}
+\def\mcD{\mathcal{D}}
+\def\mcG{\mathcal{G}}
+\def\mcL{\mathcal{L}}
+\def\bfL{\mathbf{Lin}}
+\def\bfW{\mathbf{W}}
+\newcommand{\Opd}[1]{\mathcal{O}#1}
+
+\def\BP{\mathbf P}
+\def\BQ{\mathbf Q}
+\def\PP{\mathbb P}
+\def\BB{\mathbb B}
+\def\NN{\mathbb N}
+\def\ZZ{\mathbb Z}
+\def\QQ{\mathbb Q}
+\def\RR{\mathbb R}
+
+
+\newcommand{\pic}[2]{\includegraphics[height=#1]{#2}}
+
+\setcounter{section}{3}
+
+\begin{document}
+
+\section{Assignment 4}
+
+Recall that an adjunction consists of a pair of functors $(L:\mcC\to\mcD,R:\mcD\to\mcC)$, for which we have the following natural isomorphism:
+\[\mcD(Lc,d)\cong\mcC(c,Rd)\]
+We call $L$ and $R$ the left and right adjoints, and write $L\dashv R$ for shorthand.
+
+\subsection{Problem 1}
+
+We will show that there is a length four sequence of adjunctions
+\[\pi_0\dashv \mathbf{D}\dashv U\dashv \mathbf{I}\]
+where the \emph{underlying set} functor $U:\Cat\to\Set$ takes a small category $\mcC$ to its object set $|\mcC|$ and the \emph{discrete category} functor $\mathbf{D}:\Set\to\Cat$ map a set $S$ to the category $\ol{S}$ whose object set is $S$ and whose only morphisms are identity arrows.
+
+\begin{enumerate}[(a)]
+    \item Prove that $\mathbf{D}\dashv U$. For simplicity, leave one variable fixed and simply prove naturality in the other variable.
+    
+    \item Give the rule for the behavior of the \emph{indiscrete category} functor $\mathbf{I}:\Set\to \Cat$ so as to satisfy the adjunction isomorphism. You need not check naturality.
+    
+    \item The \emph{connected components} functor $\pi_0:\Cat\to\Set$ takes a category $\mcC$ and sends it to the set of \emph{connected components} of $\mcC$. More precisely, for $\mcC$-objects $x,y$ let $x\sim y$ if there exists some \emph{zig-zag} of arrows:
+    \[x\to t_1 \ot t_2 \to t_3 \ot \cdots y\]
+    The idea is that when $x\not\sim y$, $x$ and $y$ are intuitively disconnected.
+    We then define $\pi_0\mcC=|\mcC|/\sim$. Show that $\pi_0\dashv\mathbf{D}$. You need not check naturality.
+      
+\end{enumerate}
+
+\vspace{5 mm}
+
+Recall that a monad $(T,\mu,\eta)$ in a 2-category $\mathfrak{B}$ is a monoid object in the monoidal hom-category $\mathfrak{B}(x,x)$ for some object $x$.
+
+\subsection{Problem 2}
+
+Let $(T:\mcC\to\mcC,\mu:T^2\to T,\eta:\Id{\mcC}\to T)$ be a monad in $\Cat$. Define the \emph{Kleisli category} $\mcC_T$ has object set $|\mcC|$ but arrows defined as:
+\[\mcC_T(x,y)=\mcC(x,Ty).\]
+
+The composition of arrows in this category then amounts to mapping a pair of $\mcC$-arrows $f:x\to Ty,g:y\to Tz$ to a $\mcC$-arrow $x\to Tz$, which we define as the following composition:
+\[
+\begin{tikzcd}
+x\arrow[r,"f"] & Ty \arrow[r,"Tg"] & T^2 z \arrow[r,"\mu_z"] & Tz 
+\end{tikzcd}
+\]
+
+\begin{enumerate}[(a)]
+    \item Prove that this composition is associative.
+    
+    \item Prove that the unit map $\eta_x:x\to Tx$ defines an identity arrow in $\mcC_T$.
+    
+    \item We secretly use the Kliesli category for the powerset functor $\mathcal{P}:\Set\to\Set$ when solving elementary algebra equations. For example, consider the equation
+    \[\sin^2(x) = 1\]
+    We first take the preimage of $1$ under $\square^2$ to get $\sin(x) = \{1,-1\}$, and then we apply the preimage of $\sin$ to \emph{each} of the elements in $\{1,-1\}$ and take the union of the two results. Explain how this procedure instantiates composition of arrows in the Kleisli category.
+\end{enumerate}
+
+For the following problem, use diagrammatic methods. Feel free to hand-draw your diagrams and then scan them in as an attachment to your email.
+
+\vspace{5 mm}
+
+\subsection{Problem 3}
+A dual pair $(L,R)$ in a $2$-category $\mathfrak{B}$ is a pair of $1$-arrows \mbox{$(L:x\to y,R:y\to x)$}, equipped with $2$-arrows
+\[\epsilon: L\circ R\to\Id{y} \hspace{10 mm} \eta:\Id{x}\to R\circ L\]
+satisfying the zig-zag equations.
+\begin{enumerate}[(a)]
+    \item Prove that $R\circ L$ is a monad with unit $\eta$ and multiplication given by
+    \[\mathbf{1}_R\circ \epsilon\circ\mathbf{1}_L : R\circ L\circ R\circ L \to R\circ L.\]
+    \item We say that $(X,\mu,\eta,\delta,\epsilon)$ is a Frobenius monoid if $(X,\mu,\eta)$ is a monoid, $(X,\delta,\epsilon)$ is a comonoid, and the following \emph{Frobenius Law} is satisfied. 
+    
+    \[\pic{0.8 in}{frobenius_laws.jpg}\]
+    
+    \vspace{2 mm}
+    
+    \noindent Prove that $X$ is self dual by constructing dual pair arrows \[I\to X\otimes X\to I\] via composing some arrows in the Frobenius structure, and then showing that they satisfy the zig-zag axioms.
+\end{enumerate}
+
+\end{document}
