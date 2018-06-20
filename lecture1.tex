@@ -1,0 +1,347 @@
+\section{Order Theory}
+
+We now define our first structured object.
+
+\begin{dfn}
+A \emph{preorder} $(P,\preceq)$ consists of the data
+\begin{itemize}
+    \item a set $P$
+    \item a map $\preceq : P\times P\to\BB$, called a \emph{relation}, writing $x\preceq y$ for $\preceq(x,y)=\top$,
+\end{itemize}
+satisfying the conditions
+\begin{itemize}
+    \item $x\preceq x$ (reflexivity)
+    \item $x\preceq y,y\preceq z\Rightarrow x\preceq z$ (transitivity)
+\end{itemize}
+We say that $(P,\preceq)$ is a \emph{partially ordered set}, or \emph{partial order}, or \emph{poset} if furthermore
+\begin{itemize}
+    \item $x\preceq y,y\preceq x\Rightarrow x=y$ (antisymmetry)
+\end{itemize}
+We say the poset $(P,\preceq)$ is a \emph{total order} or \emph{linear order} if in addition
+\begin{itemize}
+    \item $x\preceq y$ or $y\preceq x$ (completeness)
+\end{itemize}
+\end{dfn}
+
+We say that two preorders $(P,\preceq)$ and $(P',\preceq')$ are equal if and only if $P=P'$ and $\preceq=\preceq':P\times P\to\BB$.
+
+One family of total orders is given by numerical sets $\mathbf{n},\NN,\ZZ,\QQ,\dots$ with the relation $\leq$. In a similar vein, since false formally implies true, i.e. $\bot\Rightarrow\top$, we have the total order $(\BB,\Rightarrow)$. All finite cardinality total orders are essentially equivalent; or, as we shall soon define, isomorphic; to $(\mathbf{n},\leq)$. Things become interesting in the case of infinite cardinality, as in the theory of \emph{ordinals}, which we will not discuss.
+
+It will be visually helpful---and soon formally meaningful---to represent a preorder $(P,\preceq)$ by a so called \emph{Hasse Diagram}. This diagram is drawn by arranging the elements---often strategically---on the page and then drawing an arrow $x\to y$ to represent $x\preceq y$. For the sake of readability, when $x\preceq y$ and $y\preceq z$ we do not draw an arrow $x\to z$; rather, we take advantage of transitivity and draw the minimum number of arrows that imply the remaining ones, now visually encoded as a path of directed edges. Furthermore, by reflexivity, we never draw a loop from a vertex to itself. This can be absorbed into the path semantics via conceiving of there always being a length $0$ path from a vertex to itself.  This procedure of omitting implied arrows is called the \emph{transitive reduction} of $(P,\preceq)$. For example, we can represent $(\mathbf{n},\leq)$ as the diagram
+\[0\to 1\to 2\to\cdots\to n-1.\]
+Using this language, we can draw any \emph{directed graph}, i.e. a set of vertices (standing for elements) and a set of arrows or \emph{directed edges} between them, and conceive of it as the Hasse Diagram for a preorder $(P,\preceq)$, where $P$ is the set of vertices and $\preceq$ corresponds to the existence of a path of arrows. We call the procedure of taking a directed graph and conceiving of it as a poset its \emph{transitive closure}. We can then define the transitive reduction, and hence Hasse Diagram, of $(P,\preceq)$ as the smallest directed graph whose transitive closure is $(P,\preceq)$. We can now use this practice to generate preorders via pictures. For example, the following diagram represents the simplest preorder that isn't a poset.
+
+\[\begin{tikzcd}
+x \arrow[r, shift left=.6ex] & y \arrow[l, shift left=.6 ex]
+\end{tikzcd}\]
+
+For the time being, we will focus on \emph{nonlinear} posets, or ones that aren't totally ordered. The simplest example of such is given by the following two posets.
+\[x\to y\ot z \hspace{10 mm} x\ot y\to z\]
+Note that if we reverse the arrows on one of these posets, we get the other poset. We then say the latter is the \emph{opposite} preorder of the former, and vice versa. More formally, for a preorder $(P,\preceq)$, we write $(P,\preceq)^\text{op}$ for its opposite preorder, given by precomposing $\preceq: P\times P\to \BB$ with the map $\lambda(x,y).(y,x):P\times P\to P\times P$. Or, equivalently: $x\preceq y$ in $(P,\preceq)$ if and only if $y\preceq x$ in $(P,\preceq)^\text{op}$. Note that we have that $(-)^\text{op}$ is an \emph{involution}, i.e. \[[(P,\preceq)^\text{op}]^\text{op}=(P\preceq).\]
+
+We now introduce one of the most famous family of posets: $(\mathcal{P}X,\subseteq)$. We draw below the Hasse Diagram for the case of $X=\{a,b,c\}$.
+\begin{equation}
+\begin{tikzcd}
+ & \{a,b,c\} & \\
+ \{a,b\} \arrow[ur] & \{a,c\} \arrow[u] & \{b,c\} \arrow[ul] \\
+ \{a\} \arrow[u] \arrow[ur] & \{b\} \arrow[ul] \arrow[ur] & \{c\} \arrow[u] \arrow[ul] \\
+ & \varnothing \arrow[ul] \arrow[u] \arrow[ur] & \\
+\end{tikzcd}
+\end{equation}
+
+Note that this forms a cube. This is for good reason: by $\mathcal{P}X\cong[X\to\BB]$, which, if we compose with an isomorphism $\BB\To{\cong}\mathbf{2}::\top\to 1$, a map $X\to\mathbf{2}$. Then, if we order the elements of $X$; i.e. choose an isomorphism $X\To{\cong}\mathbf{n}$, for $n$ the cardinality of $X$; we can view this map as assigning each subset of $X$ a tuple of $0$'s and $1$'s. If we conceive of these tuples as representing coordinates in $\RR^n$, then we precisely have the unit $n$-cube centered at the origin. 
+
+\begin{equation}
+\begin{tikzcd}
+ & (1,1,1) & \\
+ (1,1,0) \arrow[ur] & (1,0,1) \arrow[u] & (0,1,1) \arrow[ul] \\
+ (1,0,0) \arrow[u] \arrow[ur] & (0,1,0) \arrow[ul] \arrow[ur] & (0,0,1) \arrow[u] \arrow[ul] \\
+ & (0,0,0) \arrow[ul] \arrow[u] \arrow[ur] & \\
+\end{tikzcd}
+\end{equation}
+
+Given a preorder $(P,\preceq)$ and a subset $Q\subseteq P$, we can let $Q$ inherit the preorder structure from $P$ to form the \emph{suborder} $(Q,\preceq)$. We now define two significant classes of suborders. Given an element $x\in P$, we define its \emph{upper set} $\mathcal{U}_x$ and \emph{lower set} $\mathcal{L}_x$ as follows.
+\begin{align*}
+    \mathcal{U}_x(P,\preceq) &= \{y\in P\mid x\preceq y\}\\
+    \mathcal{L}_x(P,\preceq) &= \{y\in P\mid y\preceq x\}
+\end{align*}
+When clear from context, we will suppress the $(P,\preceq)$ from the notation. An upper or lower set uniquely specifies an element. More formally, we have the following.
+
+\begin{prop}\label{prop:babyYoneda}
+Let $x,y\in P$ for a poset $(P,\preceq)$. Let $\mathcal{U}_x$ and $\mathcal{U}_y$ be the respective upper sets for $x$ and $y$, and suppose that $\mathcal{U}_x=\mathcal{U}_y$. Then we have that $x=y$.
+\end{prop}
+
+\begin{proof}
+By reflexivity, $x\in\mathcal{U}_x,y\in\mathcal{U}_y$. Hence, supposing $\mathcal{U}_x=\mathcal{U}_y$, $x\in\mathcal{U}_y,y\in\mathcal{U}_x$. Then $x\preceq y$ and $y\preceq x$, and therefore, by antisymmetry, $x=y$.
+\end{proof}
+
+Recalling the opposite construction, we remark that \[\mathcal{L}_x(P,\preceq)=\mathcal{U}_x(P,\preceq)^\text{op}.\]
+We can conclude, via involutivity, that the same holds if we swap the place of $\mathcal{U}$ and $\mathcal{L}$. We will exploit this so called \emph{duality} to derive facts about lower sets from facts about upper sets--for example, Proposition~\ref{prop:babyYoneda}. We will hence focus our attention on upper sets. Let's redraw the Hasse diagram for $(P\{a,b,c\},\subseteq)$, coloring red the directed edges belonging to $\mathcal{U}_{\{a\}}$ and blue the directed edges belonging to $\mathcal{U}_{\{b\}}$. In the situation where an edge belongs to both $\mathcal{U}_{\{a\}}$ and $\mathcal{U}_{\{c\}}$, we will---\emph{exclusively} for the sake of readability---draw the edge twice, once in each color. 
+\begin{equation}
+\begin{tikzcd}
+ & \{a,b,c\} & \\
+ \{a,b\} \arrow[ur,red] & \{a,c\} \arrow[u,red,shift left = 0.7 ex] \arrow[u,blue,shift right = 0.7 ex]   & \{b,c\} \arrow[ul,blue] \\
+ \{a\} \arrow[u, red] \arrow[ur,red] & \{b\} \arrow[ul] \arrow[ur] & \{c\} \arrow[u,blue] \arrow[ul,blue] \\
+ & \varnothing \arrow[ul] \arrow[u] \arrow[ur] & \\
+\end{tikzcd}
+\end{equation}
+Consider the suborder $\mathcal{U}_{\{a\}}\cap\mathcal{U}_{\{c\}}$ with Hasse Diagram
+\[\{a,c\}\to\{a,b,c\},\]
+given by the suborder consisting of doubly colored edges in the above Hasse diagram. Observe that this suborder is precisely $\mathcal{U}_{\{a,c\}}$ and that, furthermore, $\{a,c\}$ is the union of the sets $\{a\}$ and $\{c\}$. Hence we have that $\mathcal{U}_{\{a\}\cup\{c\}}=\mathcal{U}_{\{a\}}\cap\mathcal{U}_{\{c\}}$ This holds true for any pair of subsets $S,T\subseteq X$ as elements in $(\mathcal{P}X,\subseteq)$; i.e
+\[\mathcal{U}_{S\cup T}=\mathcal{U}_S\cap\mathcal{U}_T\]
+
+We say that the set union $\cup$ is the \emph{join}, denoted $\vee$, of $(\mathcal{P},\subseteq)$.
+
+\begin{dfn}
+Given a preorder $(P,\preceq)$ and two elements $x,y\in P$, their join $x\vee y$ is characterized by the following property. Given any element $t\in P$, we write
+\begin{prooftree}
+\AxiomC{$x\preceq t,y\preceq t$}
+\doubleLine
+\UnaryInfC{$x\vee y\preceq t$}
+\end{prooftree}
+This diagram should be read as ``given that which is above the line, we can deduce that which is below the line.'' The fact that the line is doubled means that the reverse also holds: ``given that which is below the line, we can deduce that which is above the line.'' Hence this encodes the fact that a pair of relations $x\preceq t,y\preceq t$ is \emph{equivalent data} to the single relation $x\vee y\preceq t$.
+\end{dfn}
+
+Since the statement $x\preceq t$ is equivalent to $t\in\mathcal{U}_x$, then $x\preceq t,y\preceq t$ is equivalent to $t\in\mathcal{U}_x\cap\mathcal{U}_y$ and $x\vee y\to t$ is equivalent to $t\in\mathcal{U}_{x\vee y}$. This implies that an equivalent characterization of the join can be given in terms of upper sets:
+\[\mathcal{U}_{x\vee y}=\mathcal{U}_x\cap\mathcal{U}_y.\]
+
+Given this definition of the join, we can define the dual concept, called the \emph{meet} $x\wedge y$ of two elements $x,y\in P$, as the join of $x$ and $y$ in the opposite order $(P,\preceq)^\text{op}$. From this, we can characterize the meet in terms of upper sets as
+\[\mathcal{L}_{x\wedge y}=\mathcal{L}_x\cap\mathcal{L}_y,\]
+or, alternatively, in a logical formulation, as
+\begin{prooftree}
+\AxiomC{$t\preceq x,t\preceq y$}
+\doubleLine
+\UnaryInfC{$t\preceq x\wedge y$}
+\end{prooftree}
+This is our first example of a \emph{universal property}. These are by some considered \emph{the} object of study of category theory. They also always come in dual pairs.
+
+Let's return to our example of the powerset order. Just as we characterized the set union order-theoretically as the join, we remark that the set intersection $\cap$ is the meet $\wedge$ in $(\mathcal{P}X,\subseteq)$. The line of thought is merely the dual of the above; but, given that a picture is worth a thousand words, we depict, by respectively coloring their lower sets red and blue, the fact that the meet of $\{a,c\}$ and $\{b,c\}$ is $\{c\}$, their intersection.
+\begin{equation}
+\begin{tikzcd}
+ & \{a,b,c\} & \\
+ \{a,b\} \arrow[ur] & \{a,c\} \arrow[u]  & \{b,c\} \arrow[ul] \\
+ \{a\} \arrow[u] \arrow[ur,blue] & \{b\} \arrow[ul] \arrow[ur,red] & \{c\} \arrow[u,red] \arrow[ul,blue] \\
+ & \varnothing \arrow[ul,blue] \arrow[u,red] \arrow[ur,blue, shift left = 0.6 ex] \arrow[ur,red,shift right = 0.6 ex] & \\
+\end{tikzcd}
+\end{equation}
+We remark that in the context of conceiving of these diagrams as cubes, that the upper and lower sets are faces and their intersection is an edge. We will return to this idea in our forthcoming reprisal of linear algebra.
+
+Note that, if $x\preceq y$ in a poset $(P,\preceq)$ then $\mathcal{U}_y\subseteq\mathcal{U}_x$ and $\mathcal{L}_x\subseteq\mathcal{L}_y$. This implies that $x\vee y=y$ and $x\wedge y = x$. Then, in the context of a total order, since $x\preceq y$ or $y\preceq x$, the join and meet concepts simply reduce to determining which of the arguments is respectively bigger and smaller. For example, in the context of $(\NN,\leq)$, we have that join and meet reduce to maximum and minimum.
+\begin{align*}
+    n\vee m &= \max(n,m)\\
+    n\wedge m &= \min(n,m)
+\end{align*}
+
+Let's now consider another family of examples. Let $n\in\NN$ and denote by $\an{n}$ the set of $k\in\NN$ for which $k|n$, i.e. which divide $n$. Then we have a poset $(\an{n},|)$. We now draw the Hasse diagram in the case of $n=30$, coloring red and blue the upper set of $2$ and $5$, respectively.
+\begin{equation}
+\begin{tikzcd}
+ & 30 & \\
+ 6 \arrow[ur,red] & 10 \arrow[u,red,shift left = 0.7 ex] \arrow[u,blue,shift right = 0.7 ex]   & 15 \arrow[ul,blue] \\
+ 2 \arrow[u, red] \arrow[ur,red] & 3 \arrow[ul] \arrow[ur] & 5 \arrow[u,blue] \arrow[ul,blue] \\
+ & 1 \arrow[ul] \arrow[u] \arrow[ur] & \\
+\end{tikzcd}
+\end{equation}
+Note that, up to relabelling vertices, this is the same Hasse diagram with that of $(\mathcal{P}\{a,b,c\},\subseteq)$. The presence of the factors $2,3,5$ plays the same role as the inclusion of the elements $a,b,c$. By the same reasoning as before, we note the join $2\vee 5=10$. But we also know from above that $10\vee 5=10$. This is none other than the least common multiple or $\lcm$. Dually, the meet in this poset is the greatest common divisor, or $\gcd$.
+
+Note that, when $p^2|n$, such as with $n=12$, $(\an{n},|))$ is no longer a cube:
+
+\begin{equation}
+\begin{tikzcd}
+ & 12 & \\
+ 4 \arrow[ur] &  & 6 \arrow[ul] \\
+ 2\arrow[u] \ar[urr] &  & 3 \arrow[u]\\
+ & 1 \arrow[ul] \arrow[ur] & \\
+\end{tikzcd}
+\end{equation}
+
+Not every poset enjoys meets and joins for all of its pairs. For example, the poset on $\{w,x,y,z\}$ with the following Hasse diagram lacks many meets and joins.
+\[w\to x\hspace{5 mm} y\to z\]
+\begin{dfn}
+The poset $(P,\preceq)$ is a \emph{lattice} if for all pairs $x,y\in P$ there exists both join $x\vee y$ and meet $x\wedge y$.
+\end{dfn}
+
+Thus far we have considered joins and meets as binary operators. These can be generalized to operators that accept subsets $S\subseteq P$ as arguments. 
+\begin{dfn}
+Given a poset $(P,\preceq)$ and a subset $S\subseteq P$, we define its \emph{least upper bound} or \emph{supremum}, denoted $\sup S$, as the unique elements in $P$ satisfying the following condition.
+\begin{prooftree}
+\AxiomC{$\sup S\preceq z$}
+\doubleLine
+\UnaryInfC{$\forall s\in S, s\preceq z$}
+\end{prooftree}
+Dually, we define its \emph{greatest lower bound} or \emph{infimum}, denoted $\inf S$, as the unique elements in $P$ satisfying the following condition.
+\begin{prooftree}
+\AxiomC{$z\preceq \inf S$}
+\doubleLine
+\UnaryInfC{$\forall s\in S, z\preceq s$}
+\end{prooftree}
+\end{dfn}
+In the special case that $S=\{x,y\}$, we have that
+\begin{align*}
+    \sup S &= x\vee y \\
+    \inf S &= x\wedge y
+\end{align*}
+In the language of upper and lower sets, we can characterize $\sup$ and $\inf$ as follows.
+\begin{align*}
+    \mathcal{U}_{\sup S} &= \bigcap_{s\in S}\mathcal{U}_s \\
+    \mathcal{L}_{\inf S} &= \bigcap_{s\in S}\mathcal{L}_s
+\end{align*}
+In the finite case, we will see---in the first assignment---that the existence of joins and meets implies the existence of suprema and infima. When $S$ is infinite---or when $S=\varnothing$ and $P$ is infinite---we will see that this is no longer the case. We say that a lattice closed under both $\sup$ and $\inf$ is \emph{complete}. We say $(Q,\preceq)$ is a \emph{completion} of $(P,\preceq)$ when $P$ is a sub-order of $Q$ and $Q$ is complete. Famously, $(\RR,\leq)$ was originally defined as the smallest completion of $(\QQ,\leq)$.
+
+Just as maps are the ``verb'' to the sets' ``noun,'' orders too have a map-notion.
+
+\begin{dfn}
+A \emph{monotone map} $(P,\preceq)\to (Q,\sqsubseteq)$ consists of
+\begin{itemize}
+    \item a map $f:P\to Q$
+\end{itemize} 
+such that
+\begin{itemize}
+    \item $x\preceq y\Rightarrow fx\sqsubseteq fy$.
+\end{itemize}
+An \emph{antitone map} $: (P,\preceq)\to(Q,\sqsubseteq)$ is a monotone map $: (P,\preceq)^\text{op}\to(Q,\sqsubseteq)$.
+\end{dfn}
+
+We now list some examples. 
+
+\begin{enumerate}
+    \item $(\square+n),(\square\cdot t),(\square^k):(\NN,\leq)\to(\NN,\leq)$ for $n,k,t\in\NN$
+    \item $(\square\cdot t),(\square^k):(\NN,|)\to(\NN,|)$ for $t,k\in\NN$ since $a|b\Rightarrow (ta)|(tb),a^k|b^k$.
+    \item $\lambda n.n:(\NN,|)\to(\NN,\leq)$ since $a|b\Rightarrow a\leq b$.
+    \item $(-)\cup T,(-)\cap T: (\mathcal{P}X,\subseteq)\to (\mathcal{P}X,\subseteq)$ for $T\subseteq X$.
+    \item the \emph{set complement}, given by the $X$ elements \emph{not} in $S$: \[(-)^c:(\mathcal{P}X,\subseteq)^\text{op}\to(\mathcal{P}X,\subseteq)::S\mapsto S^c=\{x\in X\mid x\notin S\},\]
+    since $A\subseteq B\Rightarrow B^c\subseteq A^c.$
+    \item given a map $f:X\to Y$, its preimage $f^*:(\mathcal{P}Y,\subseteq)\to(\mathcal{P}X,\subseteq)$, since \[A\subseteq B\Rightarrow f^*A\subseteq f^*B.\]
+\end{enumerate}
+
+\vspace{2 mm}
+
+We now list some non-examples.
+
+\vspace{2 mm}
+
+\begin{enumerate}
+    \item $\square^2:(\ZZ,\leq)\to(\ZZ,\leq)$ since $(-3)\leq(-1)$ but $(-1)^2=1\leq 9=(-3)^2$. 
+    \item $(\square+k):(\NN,|)\to(\NN,|)$ for $k\neq 0$, since $1| p-k$ but not $1+k|p$ for prime $p$.
+    \item $\lambda n.n:(\NN,\leq)\to(\NN,|)$ since $p\leq q$ but not $p|q$ for primes $p,q$.
+\end{enumerate}
+
+We say two posets $(P,\preceq),(Q,\sqsubseteq)$ are \emph{isomorphic} if there exist monotone maps $f:(P,\preceq)\to(Q,\sqsubseteq)$ and $g:(Q,\sqsubseteq)\to(P,\preceq)$ such that $g\circ f=\Id{P}$ and $f\circ g = \Id{Q}$. Although a monotone map often has no inverse, it may sometimes possess another kind of meaningful map going in the reverse direction.
+
+\begin{dfn}
+We say the pair $(L,R)$ of monotone maps $L:(P,\preceq)\to(Q,\sqsubseteq)$ and $R:(Q,\sqsubseteq)\to (P,\preceq)$ form a \emph{Galois connection} when:
+\begin{prooftree}
+\AxiomC{$Lx\sqsubseteq y$}
+\doubleLine
+\UnaryInfC{$x\preceq Ry$}
+\end{prooftree}
+We call $L$ the \emph{left Galois connection} of $R$ and $R$ the \emph{right Galois connection} of $L$.
+\end{dfn}
+
+It is worth broadcasting a caution that this definition is emphatically asymmetric in $L$ and $R$. Let's consider an example. Define 
+\[i:(\ZZ,\leq)\to(\QQ,\leq)::n\mapsto n\]
+as the map merely \emph{retypes} an integer as a rational number, without changing what we conceive of as its value. How do we go back the other way; i.e. get an integer from a rational? There's two particularly available options:
+\begin{align*}
+    \operatorname{floor}&:\QQ\to\ZZ :: q\mapsto\floor{q} \\
+    \operatorname{ceiling}&:\QQ\to\ZZ ::q\mapsto\ceil{q},
+\end{align*}
+Which are defined, respectively, as the largest integer less than $q$ and the smallest integer greater than $q$. Notice that these definitions take on a similar linguistic character as those for meets and joins. This is no coincidence, as we shall shortly investigate further. These statements can actually be reformulated in terms of the following Galois connections.
+\begin{prooftree}
+\AxiomC{$i(n)\leq q$}
+\doubleLine
+\UnaryInfC{$n\leq \floor{q}$}
+\end{prooftree}
+\begin{prooftree}
+\AxiomC{$q\leq i(n)$}
+\doubleLine
+\UnaryInfC{$\ceil{q}\leq n$}
+\end{prooftree}
+In other words, $(i,\operatorname{floor})$ and $(\operatorname{ceiling},i)$ are Galois connections. The following---our first!---theorem justifies why we care about Galois connections.
+\begin{thm}\label{thm:babyRAPL}
+Let $(P,\preceq)$ and $(Q,\sqsubseteq)$ be preorders and $(L:P\to Q,R:Q\to P)$ be a Galois connection. Then $L$ preserves suprema and $R$ preserves infima.
+\end{thm}
+
+\begin{proof}
+\begin{align*}
+    z\in \mathcal{U}_{L(\sup S)} &\Leftrightarrow L(\sup S)\sqsubseteq z \\ 
+    &\Leftrightarrow \sup S\preceq Rz \\
+    &\Leftrightarrow \forall s\in S, s\preceq Rz \\
+    &\Leftrightarrow \forall s\in S, Ls\sqsubseteq z \\
+    &\Leftrightarrow \forall s'\in L(S), s'\sqsubseteq z \\
+    &\Leftrightarrow \sup L(S)\sqsubseteq z \\
+    &\Leftrightarrow z\in\mathcal{U}_{\sup L(S)}
+\end{align*}
+Therefore $\mathcal{U}_{L(\sup S)}=\mathcal{U}_{\sup L(S)}$, and hence, by Proposition~\ref{prop:babyYoneda}, $L(\sup S)=\sup L(S)$. Applying $(-)\op$ gives the dual result $R(\inf S)=\inf R(S)$
+\end{proof}
+
+Applying this to our above example, we have that
+\begin{align*}
+    \ceil{\sup S} &=\sup\ceil{S} \\
+    \floor{\inf S} &=\inf\floor{S} 
+\end{align*}
+In the binary case, where the supremum and infimum respectively reduce to the maximum and mimum of a pair of numbers, it turns out that both $\operatorname{ceil}$ and $\operatorname{floor}$ preserve both maxima and minima. These two other facts---that $\operatorname{ceil}$ preserves minima and $\operatorname{floor}$ preserves maxima---turn out to be incidental in a way distinct from those implied by our Galois connections. To see this, we note that this breaks down in the infinite case. Let $S=\{\frac{1}{n}\}_{n\in\NN}$, then we have that $\inf S = 0$, and hence
+\begin{align*}
+    \ceil{\inf \{\tfrac{1}{n}\}_{n\in\NN}}&= \ceil{0} \\ &= 0,
+\end{align*}
+but, in contrast
+\begin{align*}
+    \inf{\ceil{\{\tfrac{1}{n}\}_{n\in\NN}}} &= \inf{1} \\
+    &= 1.
+\end{align*}
+
+Note that the Galois Connections also imply that $i$ preserves both ceilings and floors. On one hand, since $i$ does not change its arguments' ``values,'' this may be thought to have been obvious. This turns out, however, to be substantive. Consider, in contrast, the map $\lambda n.n:(\NN,|)\to(\NN,\leq)$ also leaves its arguments' values unchanged---the immersion, however, into a new ordering drastically alters suprema and infima.
+
+We now consider an example of a Galois connection involving antitone maps, or an antitone Galois connection. Given a set $X$, we have the antitone complement map $\mathcal{P}X\to\mathcal{P}X$. This map can be seen as a monotone map of type either $\mathcal{P}X\op\to\mathcal{P}X$ or $\mathcal{P}X\to\mathcal{P}X\op$. For the sake of being explicit, we respectively name these two maps $\operatorname{comp}$ and $\operatorname{comp}'$. It turns out that $(\operatorname{comp},\operatorname{comp}')$ form a Galois connection. This says that the following equivalence holds.
+\begin{prooftree}
+\AxiomC{$\operatorname{comp}(S)\subseteq T$}
+\doubleLine
+\UnaryInfC{$S\subseteq\operatorname{comp}'(T)$}
+\end{prooftree}
+To see this, replace these type-sensitive names with the simpler $\overline{\square}$ notation:
+\begin{prooftree}
+\AxiomC{$\ol{S}\subseteq T$}
+\doubleLine
+\UnaryInfC{$S\subseteq\ol{T}$}
+\end{prooftree}
+This can be seen by applying the complement to the top and noting that $\ol{\ol{S}}=S$. Applying Theorem~\ref{thm:babyRAPL}, and using the $\ol{\square}$ notation, we see that
+\begin{align*}
+    \ol{S\cup T} &= \ol{S}\cap\ol{T} \\
+    \ol{S\cap T} &= \ol{S}\cup\ol{T}.
+\end{align*}
+Note that, since the complement is antitone, it swaps meets and joins in input and output. The reader may already be familiar with these as the \emph{De Morgan Laws}. Given a Galois connection $(L,R)$ between lattices, we will henceforth refer to the following resultant identities as the \emph{De Morgan Laws} for $(L,R)$.
+\begin{align*}
+    L(x\vee y) &= Lx\vee Ly \\
+    R(x\wedge y) &= Rx\wedge Ry.
+\end{align*}
+We end the section by exploring another consequence of Galois connections.
+\begin{prop}
+If $(L,R)$ is a Galois connection on posets, then
+\[LRL = L \hspace{10mm} RLR = R\]
+\end{prop}
+\begin{proof}
+\begin{align*}
+    \text{reflexivity } &\Rightarrow RL x\preceq RLx \\
+    &\Rightarrow LRLx \preceq Lx
+\end{align*}
+
+\begin{align*}
+    \text{reflexivity } &\Rightarrow L x\preceq Lx \\
+    &\Rightarrow x \preceq RLx \\
+    &\Rightarrow Lx \preceq LRLx
+\end{align*}
+Using antisymmetry yields the first identity. Duality yields the second.
+\end{proof}
+
+A corollary of this is that $LR$ and $RL$ are both idempotent, i.e. 
+\[LRLR = LR \hspace{10 mm} RLRL = RL.\]
+In the context of floors and ceilings, this justifies the well known facts
+\[\ceil{\ceil{x}} = \ceil{x} \hspace{10 mm} \floor{\floor{x}} = \floor{x}.\] By rearranging reflexivity, we also have that
+\[x\preceq RLx \hspace{10 mm} LRx\preceq x.\]
+We call idempotent monotone operators like $RL$ \emph{closure} operators, and those like $LR$ \emph{interior} operators. Usually the former is the preferred notion. Closure operators abound in mathematics and formalize a process that chooses for some element in a poset the least larger element that satisfies some property. For example, if $V$ is some $k$-vector space, and we look at $\mathcal{P}V$, we may wish to ask: given $S\subseteq V$, what is the smallest subspace $U$ containing $S$? This is precisely the $k$-linear span:
+\[kS = \{\textstyle\sum_{i=1}^n\alpha_is_i\mid \alpha_i\in k,s_i\in S\}.\]
+In fact, this closure operator arises from a Galois connection! Let $\mathcal{S}V$ be the suborder of $\mathcal{P}V$ consisting of subspaces of $V$ and let $i:\mathcal{S}V\to\mathcal{P}V$ be the inclusion and $k:\mathcal{P}V\to\mathcal{S}V$ be the $k$-linear span, thought of as having codomain subspaces. Then $(k,i)$ is a Galois connection, i.e.
+\begin{prooftree}
+\AxiomC{$kS\subseteq U$}
+\doubleLine
+\UnaryInfC{$S\subseteq i(U)$}
+\end{prooftree}
+This fact---that $S$ is a subset of some subspace $U$ just if its span is a subset of $U$---is, given our theory, precisely why the linear span is a closure operator.

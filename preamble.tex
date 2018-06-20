@@ -1,0 +1,107 @@
+%\usepackage{etex}
+%\usepackage{graphicx}
+%\usepackage{amsfonts}
+%\usepackage[usenames,dvipsnames]{xcolor}
+%\usepackage[bookmarks=true,colorlinks=true, linkcolor=RoyalBlue, citecolor=magenta]{hyperref}
+\usepackage{subfig}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{cmll}
+\usepackage{url}
+\usepackage{bbm}
+\usepackage{stmaryrd}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{bussproofs}
+\usepackage{enumerate}
+
+%Theorem Environments%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+
+\theoremstyle{definition}
+\newtheorem{dfn}[thm]{Definition}
+\newtheorem*{notation*}{Notation}
+
+\theoremstyle{definition}
+\newtheorem{ex}[thm]{Example}
+
+%Definitions%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\List}{List}
+\DeclareMathOperator{\irr}{Irr}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\eq}{eq}
+\DeclareMathOperator{\coeq}{coeq}
+\DeclareMathOperator{\tr}{Tr}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\colim}{colim}
+\DeclareMathOperator{\Stream}{Stream}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Bilin}{Bilin}
+\DeclareMathOperator{\Cone}{Cone}
+\DeclareMathOperator{\Cocone}{Cocone}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\mat}{Mat}
+
+
+\def\taking{\colon}
+\def\ot{\leftarrow}
+\def\too{\longrightarrow}
+\def\inj{\hookrightarrow}
+\newcommand{\an}[1]{\langle #1 \rangle}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\def\rla{\rightleftharpoons}
+\newcommand{\To}[1]{\xrightarrow{#1}}
+\newcommand{\From}[1]{\xleftarrow{#1}}
+\def\ss{\subseteq}
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\Id}[1]{\mathbbm{1}_{#1}}
+\def\then{\sslash}
+\newcommand{\mtrx}[3]{{}_{#1}[#2]_{#3}}
+
+\def\op{^{\text{op}}}
+\def\Set{\mathbf{Set}}
+\def\Rel{\mathbf{Rel}}
+\def\Fin{\mathbf{Fin}}
+\def\Vect{\mathbf{Vect}}
+\def\Pos{\mathbf{Pos}}
+\def\Pre{\mathbf{Pre}}
+\def\Tot{\mathbf{Tot}}
+\def\Mon{\mathbf{Mon}}
+\def\Com{\mathbf{Com}}
+\def\Grp{\mathbf{Grp}}
+\def\Cat{\mathbf{Cat}}
+\def\Alg{\mathbf{Alg}}
+\def\mcC{\mathcal{C}}
+\def\mcD{\mathcal{D}}
+\def\mcG{\mathcal{G}}
+\def\mcL{\mathcal{L}}
+\def\bfL{\mathbf{Lin}}
+\def\bfW{\mathbf{W}}
+\newcommand{\Opd}[1]{\mathcal{O}#1}
+
+\def\BP{\mathbf P}
+\def\BQ{\mathbf Q}
+\def\PP{\mathbb P}
+\def\BB{\mathbb B}
+\def\NN{\mathbb N}
+\def\ZZ{\mathbb Z}
+\def\QQ{\mathbb Q}
+\def\RR{\mathbb R}
+
+
+\newcommand{\pic}[2]{\includegraphics[height=#1]{#2}}

@@ -1,0 +1,221 @@
+\section{Preliminaries}
+A \emph{set} $X$ is a collection of \emph{elements}. When $x$ is an element of $X$, we write $x\in X$. When a set $X$ consists of specified elements $x,y,\dots$, we write $X=\{x,y,\dots\}$. What follows is a list of sets whose notation and name we fix throughout the sequel.
+
+\begin{itemize}
+    \item the \emph{empty} or \emph{null} set $\varnothing=\{\}$
+    \item the generic \emph{singleton} $\star=\{*\}$
+    \item the \emph{Booleans} $\BB=\{\top,\bot\}$, where $\top$ is ``true'' and $\bot$ is ``false''
+    \item the generic $n$-element set $\mathbf{n}=\{0,1,\dots n-1\}$
+    \item the \emph{natural numbers} $\NN=\{0,1,\dots\}$
+    \item the \emph{integers} $\ZZ=\{\dots -1,0,1,\dots\}$
+\end{itemize}
+
+Two sets $A,B$ are said to be equal, in which case we may write $A=B$, when $x\in A$ if and only if $x \in B$. We note that $\varnothing = \mathbf{0}$, and hence these can be used interchangeably. The \emph{cardinality} of a set is its number of elements. Although $\star$ and $\mathbf{1}$ are not equal, they both aspire towards being ``generic'' sets of cardinality $1$ and are hence interchangeable since their respective elements are mere placeholders. In both cases, we will choose the notation whose evocation best matches the context.
+
+We say $A$ is a \emph{subset} of $X$ and write $A\subseteq X$ when $x\in A$ implies $x\in X$.
+When we wish to define a subset $B$ from a set $X$ that keeps only the elements of $X$ that satisfy some \emph{predicate}, i.e. \emph{condition}, $\BP$, we write $B=\{x\in X \mid \BP(x)\}$. One reads each term in this expression using the following dictionary:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c||c}
+        $\{\}$ & ``the set of'' \\
+        $x\in X$ & ``$x$'s in $X$'' \\
+        $\mid$ & ``such that'' \\
+        $\BP(x)$ & ``the predicate $\BP$ holds for $x$''
+    \end{tabular}
+\end{table}
+Alternatively, we may also write this set via the shorthand $X|_{\BP}$, which should be read as ``the set $X$, \emph{restricted} to its elements that satisfy $\mathbf{P}$.'' For example, we write $\ZZ|_{\leq 3}=\{\dots,-3,-2,\dots,2,3\}$, or sometimes, when unambiguous, as simply $\ZZ_{\leq 3}$, omitting the `$|$' symbol altogether. This style of specifying sets---via elements of an ambient set for which a specified predicate holds---is called \emph{set-builder} notation. We can express many familiar constructions this way. For example, the \emph{powerset} $\mathcal{P}X=\{S\subseteq X\}$ is the set of all subsets of $X$. Furtheremore, given two subsets $A,B\subseteq X$, i.e. elements $A,B\in\mathcal{P}X$, we can use this notation to define the following two new subsets.
+\begin{itemize}
+    \item the \emph{union} $A\cup B = \{x\in X\mid x\in A\text{ or }x\in B\}$
+    \item the \emph{intersection} $A\cap B = \{x\in X\mid x\in A\text{ and }x\in B\}$
+\end{itemize}
+We say that two subsets $A,B\subseteq X$ are \emph{disjoint} when $A\cap B=\varnothing$. We say that $A,B$ are \emph{exhaustive} when $A\cup B=X$. We say that $A,B$ \emph{partition} $X$ when they are both disjoint and exhaustive.
+
+More generally, we can write some \emph{expression} to the left of the `$|$'  instead of just the element $x\in X$. In this case, we use the convention that the set to which each element in the expression belongs is written to the right of the `$\mid$' symbol. For example, we can define the set $\QQ$ of \emph{rational numbers} using this notation:
+\[\QQ = \{\tfrac{p}{q}\,\mid\,p,q\in\ZZ,q\neq 0\}\]
+In this case our set consists of expression given by the fractions $p/q$, whose constituent terms $p,q$ are subject to the condition that they are integers, and that $q$ is subject to the condition that it does not equal $0$. Note that we have thus far employed commas as an informal ``and.''
+
+The flip side of restricting a set is \emph{excluding} from a set. More precisely, when $S\subseteq X$, we write $X\setminus S=\{x\in X\mid x\notin S\}=X|_{\notin S}$. Then, if $\BP'$ is the negation of $\BP$, we have that $X|_{\BP'}=X\setminus X|_{\BP}$. We will more often characterize sets via restrictions than exclusions.
+
+We now introduce some fundamental abstract operations on sets. Unlike the previous operations---restrictions, unions, intersections, exclusions---these are not \emph{internal} operations---those on a subset relative to some ambient set---but rather are \emph{external} operations on sets themselves. Given two sets $X,Y$, we define their \emph{Cartesian product} 
+\[X\times Y =\{(x,y)\mid x\in X,y\in Y\}\]
+as the set of \emph{ordered pairs} whose first entry is in $X$ and second entry in $Y$. Given these sets, we can also form their \emph{disjoint union} or \emph{sum} $X+Y$ as the set consisting of the $X$-elements alongside the $Y$-elements. This is not the same as the union! One takes the union of two \emph{subsets} $A,B\subseteq X$ of a fixed \emph{ambient set} $X$ by considering the set of $X$-elements that are present in at least one of $A$ or $B$. This means that an $X$-element that appears in both $A$ and $B$ is not double counted. However, we need this ambient set $X$ in order to even compare elements of $A$ with those of $B$, since these a priori have nothing to do with each other. In practice, it has historically been frustrating to articulate the distinction between these two concepts since most of the time we express the elements of our two sets $X,Y$ using a shared ``alphabet of symbols,'' which implicitly plays the role of ambient set. Generically, however, if no interaction is pre-specified between two sets $X,Y$, we cannot even think about what it would mean to form the classic union, since the elements of each exist beyond comparison with each other.
+
+Returning to internal operations, we will also be interested in \emph{quotients} of sets. This means that, if we have some notion of ``equivalence'' that is coarser than that of equality of elements, we can partition the set into mutually disjoint and collectively exhaustive classes of ``equivalent'' elements. More formally, an \emph{equivalence relation} $\sim$ on a set $X$ is a certain kind of predicate on $X\times X$. We use \emph{infix} notation $x\sim x'$ in place of $\sim(x,x')$ to express that ``$x$ is related, via $\sim$, to $x'$.'' This relation must satisfy the following conditions.
+\begin{itemize}
+    \item $x\sim x$ (\emph{reflexivity})
+    \item $x\sim x' \Leftrightarrow x'\sim x$ (\emph{symmetry})
+    \item $x\sim x',x'\sim x''\Rightarrow x\sim x''$ (\emph{transitivity})
+\end{itemize}
+Given $\sim$ on $X$, we write $[x]$ for the \emph{equivalence class} of $x$, i.e. the set 
+\[X|_{\sim x}=\{x'\in X\mid x'\sim x\}\] 
+of $X$-elements equivalent to $x$. We then define the \emph{quotient} $X_{/\sim}$ as the set of $\sim$-equivalence classes of $X$, i.e. $X_{/\sim}=\{[x]\mid x\in X\}$. Consider the following example. Let $A$ consist of the set of points in the United States. Define $\sim$ by $x\sim y$ if and only if $x$ and $y$ belong to the same state. Then, if $p$ is some point on the Duke University campus, $[p]$ can be identified with the set of points in North Carolina. We then see that $A_{/\sim}=\{\text{the fifty states}\}$.
+
+A function, or henceforth, \emph{map} $f$ of type $X\to Y$, for sets $X$ and $Y$, is a rule that assigns each element $x\in X$ precisely one element $fx\in Y$. We call $X$ the \emph{domain} and $Y$ the \emph{codomain} of $f$. We often refer to an element of the domain as an \emph{argument} and an element of the codomain as a \emph{value}. We say $f$ \emph{takes arguments} in $X$ and \emph{takes values} in $Y$. When applying a map $f$ to an argument $x$, we say it \emph{evaluates} to the value $fx$. When we specify a map by both its type and its rule, we use the notation
+\[f:X\to Y::x\mapsto fx,\]
+which should be read using the following dictionary
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c||c}
+        $f$ & ``the map $f$'' \\
+        $:$ & ``of type'' \\
+        $X\to Y$ & ``$X$ to $Y$'' \\
+        $::$ & ``given by'' \\
+        $x\mapsto fx$ & ``$x$ maps to $fx$''
+    \end{tabular}
+\end{table}
+
+We write $X\To{f}Y$ as shorthand for $f:X\to Y$. Sometimes, instead of inserting `$::$' between the type and the rule, we simply place the rule below the type so as to align elements with their sets:
+\begin{align*}
+    X&\To{f} Y \\
+    x&\mapsto fx
+\end{align*}
+Two maps $f,g:X\to Y$ are said to be equal precisely when $fx=gx$ for all arguments $x\in X$.
+
+It may be worthwhile to name a map by its rule. We call such a specification an \emph{anonymous declaration}. If the intricacy of a situation calls for careful formality, we will use $\lambda$-calculus syntax, which would express our above map via the notation \[\lambda x.fx : X\to Y\]
+This is particularly useful in expressing situations in which an argument maps to a function. For example, consider the map $I:\mcC^\infty\to\mcC^\infty$ that sends a smooth map $f$ to the smooth map given by mapping $x$ to $\int_0^x f(t) dt$. We can write this as
+\begin{equation} \label{eqn:integral}
+    I:\mcC^\infty\to\mcC^\infty::f\mapsto \lambda x.\textstyle\int_0^xf(t)dt
+\end{equation}
+More often, however, we will use the less formal notation $f(-)$, which should evaluate an argument $x$ by substituting $x$ in place of the $-$. For example: 
+\[[\textstyle\int_0^x(-)dt](1)= x\]
+If our map involves arithmetic, we will use $\square$ in place of $(-)$ to avoid ambiguity.
+
+For every set $X$, its \emph{identity map} is defined as \[\Id{X}:X\to X::x\mapsto x.\] 
+Given maps 
+\[f:X\to Y::x\mapsto fx \text{ and } G:Y\to Z::y\mapsto gy\] we can form their \emph{composition} $g\circ f$, or simply $gf$, as \[g f:X\to Z::x\mapsto gfx.\]
+The composition and identity satisfy two important axioms.
+
+\begin{itemize}
+    \item \emph{(associativity)} $[f\circ g]\circ h=f\circ[g\circ h]$, whenever these are composable.
+    \item \emph{(identity)} $f\circ\Id{X}=f=\Id{Y}\circ f$, for $f\taking X\to Y$.
+\end{itemize}
+
+The following elementary examples serve to demonstrate that map composition and identity generalize familiar arithmetic operations and identities.
+\begin{align*}
+    (\square+n)\circ (\square+m) &=\square + (n+m) \\
+    (\square\cdot n)\circ (\square\cdot m) &=\square \cdot (nm) \\
+    (\square+n)\circ (\square+0) &= (\square +0)\circ(\square+n)=\square+n\\
+    (\square\cdot n)\circ (\square\cdot 1) &= (\square \cdot 1)\circ (\square\cdot n)=\square\cdot n
+\end{align*}
+
+We would be remiss not to point out the following frustration. When written as a string of arrows, our situation is represented by the \emph{diagram}\[X\To{f}Y\To{g}Z,\]
+which automatically renders in many minds as $fg$ instead of $gf$. This unfortunate convention is a consequence of the `$f(x)$' notation, due to Euler, for the evaluation of an argument $x$ by a map $f$. When treating historically ossified contexts like linear algebra, we will bend to this convention. In situations for which it would heretical to do so, however, we write the above composition in \emph{diagrammatic order} as $f\then g$, to be read as ``$f$ then $g$.'' In such contexts, we will also write $x\then f$ in place of $f(x)$. This is justified by interpreting each element $x\in X$ as the map 
+\[x:\star\to X::*\mapsto x.\]
+
+This notation, with equal precision yet more succinctness and or evocativeness, recaptures familiar facts in terms of map algebra. For example, we can reconceptualize ``completing the square'' as factoring---via $\circ$ not $\times$---a quadratic map \[q:\RR\to\RR::x\mapsto ax^2+bx+c\] into the map composition \[q = L_v\circ \square^2 \circ L_h\] for some linear polynomial maps $L_v, L_h$. For example, the equality on values \[q(x)=x^2-6x+16=(x-3)^2+7\] can now be recast as the equality on maps
+\[q = (\square+7)\circ\square^2\circ(\square -3).\]
+This has the advantage of assessing $q$ directly without considering its evaluation on arguments. Furthermore, this modularizes $q$ into composable sub-processes. This decomposition, although obscured by the classic notation, is, as we shall soon see, precisely why completing the square solves quadratic equations.
+
+Sometimes it's meaningful to consider a map which takes a pair of arguments; for example addition $+$ or multiplication $\times$ of numbers. A \emph{binary operation} $\odot$ taking pairs of $X$ elements as argument and outputting $Y$ values can be conceived of as a map $\odot:X\times X\to X$. We use the infix notation $x\odot y$ as shorthand for $\odot(x,y)$. A set $X$ with a binary operation defined on it is called a \emph{magma}. For example, addition and multiplication of pairs of integers yields an operations of type $\ZZ\times\ZZ\to\ZZ$. Suppose we wish to iterate $\odot$ on more than two arguments:
+\[(((w\odot x)\odot y)\odot z).\]
+This operation takes $4$ inputs. More generally, we define an $n$-ary operation as one that takes $n$ arguments. Such an operation has as domain the \emph{Cartesian power}
+\[X^n=\{(x_0,\dots,x_{n-1})\mid \forall i\in\mathbf{n},x_i\in X\}.\]
+We refer to elements of a Cartesian power as \emph{tuples}. Given a binary operation, the number of possible $n$-ary operations we can form from it grows wildly with $n$. The situation dramatically simplifies if we suppose further that $\odot$ is \emph{associative}:
+\[x\odot(y\odot z)=(x\odot y)\odot z.\]
+A set $X$ with an associative binary operation is often called a \emph{semigroup}. We can then simply write $x\odot y\odot z$ without concern for bracketing. Iteratively applying associativity allows for the unique extension of $\odot$ to the following $n$-ary operator that takes as argument any tuple $(x_j)_{j=0}^{n-1}=(x_0,\dots, x_n)\in X^n$.
+\[\bigodot_{j=0}^{n-1}:X^n\to Y::(x_j)_{j=0}^{n-1}\mapsto x_0\odot\cdots\odot x_{n-1}\]
+Note that, by convention, we simply write $\bigodot_{j=0}^{n-1}x_i$ in place of $\bigodot_{j=0}^{n-1}(x_i)_{i=0}^{n-1}$. When $\odot$ is invariant under swapping arguments, we say it is \emph{commutative}:
+\[x\odot y=y\odot x.\]
+In this situation, since the order does not matter, $\odot$ can be extended to an operation that takes any non-empty finite set $J$'s worth of arguments. This can be encoded by the \emph{indexed tuple} $(x_j)_{j\in J}$, where we call $J$ the \emph{indexing set}. We call the extension of $\odot$ to such arguments a (finitely) \emph{indexed} operation. Since an indexed tuple $(x_j)_{j\in J}$ can be seen as a map $J\to X::j\mapsto x_j$, the domain of this operation should be the set of such maps $[J\to X]$. We then denote the indexed operation as follows.
+\[\bigodot_{j\in J}:[J\to X]\to Y.\] Note that, since the $n$-ary version can be seen as the special case of the above, we have that $X^n$ is in some sense ``the same'' as $[\mathbf{n}\to X]$. We will investigate this sameness in future lectures.
+
+Sometimes, for the sake of encoding structure more systematically, we may also be interested in the \emph{nullary} version of $\odot$, i.e. one that takes zero arguments. What exactly could this mean? The idea is that this should be the $X$ element, if one such exists, that is inert under $\odot$. 
+
+Given two indexing sets $J,I$ with indexed tuples $(x_j)_{j\in J}$ and $(x_j)_{j\in I}$ in $X$, we can form the combined indexed tuple $(x_j)_{j\in J+I}$ with indexing set $J+I$. Applying this situation to our operators yields the following identity.
+\[\bigodot_{j\in J+I}x_i=\left[\bigodot_{j\in J}x_i\right]\odot \left[\bigodot_{j\in I}x_i\right]\]
+Note that, in the situation that $I$ is the empty set $\varnothing$, $J+I$ is essentially just $J$. This reduces the above to:
+\[\bigodot_{j\in J}x_i=\left[\bigodot_{j\in J}x_i\right]\odot \left[\bigodot_{j\in \varnothing}x_i\right]\]
+When $J$ is a singleton $\{j\}$, and we denote $x_j$ simply as $x$, we have the following.
+\[x=x\odot\left[\bigodot_{j\in \varnothing}x_i\right]\]
+Since $J+\varnothing$ and $\varnothing+J$ are both equivalent to $J$, this is also equal to swapping factors on the right hand side. Therefore we \emph{define} the nullary $\odot$ operation to be the constant map that picks out the inert or \emph{unit} element $\epsilon$ of $\odot$. More formally, we say that $\odot$ satisfies \emph{unitality} with \emph{unit} $\epsilon$ when for any $x\in X$:
+\[\epsilon\odot x = x = x \odot\epsilon.\]
+A set $X$ with an associative operation that has a unit is called a \emph{monoid}.
+Let's apply this principle to the operations $+$ and $\times$, whose $n$-ary extensions are denoted with the symbols $\sum$ and $\prod$, respectively.
+\[\sum_{j\in\varnothing}x_j=0 \hspace{10 mm} \prod_{j\in\varnothing}x_j=1.\]
+In the special case that $x_j=j$, the latter reduces to the fact that $0!=1$.
+
+We may also consider the union and intersection as binary operations $\mathcal{P}X\times\mathcal{P}X\to\mathcal{P}X$. These are associative and unital with the following nullary forms:
+\[\bigcup_{j\in\varnothing}S_j=\varnothing \hspace{10 mm} \bigcap_{j\in\varnothing}S_j=X.\]
+We now return to the context of general maps $f:X\to Y$. Given a subset $A\subseteq Y$, we define its \emph{preimage} under $f$ as
+\[f^*(A)=\{x\in X\mid fx\in A\}.\]
+We would like to conceive of $f^*$ as a map. Since it takes arguments and values in subsets it is a map of type $\mathcal{P}Y\to\mathcal{P}X$. We can restrict this map to singletons $\{y\}$ in $Y$. In this case, we abuse notation and write $f^*:Y\to\mathcal{P}X$. We use this map to define the \emph{jectivity} properties of $f$; in particular, we say that $f$ is
+\begin{itemize}
+    \item \emph{surjective} if for all $y\in Y$, $f^*(y)$ has \emph{at least} $1$ element
+    \item \emph{injective} if for all $y\in Y$, $f^*(y)$ has \emph{at most} $1$ element
+    \end{itemize}
+
+These properties have an interpretation in the context of equations. An \emph{equation} \[f(x)=y\] is merely a prompt, given a map $f$ and a value $y\in Y$, to compute the preimage $f^*(y)$. We say that $f$ has the
+
+\begin{itemize}
+    \item \emph{existence property} if for all $y\in Y$, there exists a solution to $f(x)=y$
+    \item \emph{uniqueness property} if for all $y\in Y$, any solution to $f(x)=y$ is unique
+    \end{itemize}
+To write expressions for solutions to equations $[g\circ f](x) = z$ that involve map compositions $X\To{f}Y\To{g}Z$, we simply apply iterated preimages:
+\[\mathcal{P}Z\To{g^*}\mathcal{P}Y\To{f^*}\mathcal{P}X\]
+As an example, consider the equation $\tan^2(x)=3$, which can be rewritten as
+\[[\square^2\circ\tan](x)=3.\] Before solving our equation, we compute the relevant reduced preimages
+\begin{align*}
+    \tan^*:\RR\to\mathcal{P}\RR &::x\mapsto \{\arctan x+2\pi n\mid n\in\ZZ\}=:\arctan{x}+2\pi\ZZ \\
+    [\square^2]^* :\RR\to\mathcal{P}\RR &::x\mapsto\{\sqrt{x},-\sqrt{x}\}=:\pm\sqrt{x}.
+\end{align*}
+We now compute our solution set $A$:
+\begin{align*}
+    A&=[(\tan)^*\circ(\square^2)^*] (3)\\&=(\tan)^*(\pm\sqrt{3})\\&=\arctan(\pm\sqrt{3})+2\pi\ZZ \\
+    &=\pm\frac{\pi}{3}+2\pi\ZZ
+\end{align*}
+Applying this to the context of a quadratic map $q$, its roots can be expressed as
+\[[L^*_h \circ [\square^2]^* \circ L^*_v](0).\]
+
+We say that $f$ is \emph{bijective} when it is both surjective and injective. In this case, for each $y\in Y$, there is always precisely one element $x\in X$ such that $fx=y$. This allows us to construct a map $f^{-1}:Y\to X$ sending $y$ to this unique element. In other terms, $f^*(y)$ is a singleton $\{x\}$ and, since it is precisely this sole element $x$ to which $y$ gets sent, we write $f^{-1}y=x$. We say the map $f^{-1}$ is the \emph{inverse} map to $f$. Given a map $f:X\to Y$, its inverse map $g:Y\to X$ is a map such that
+\begin{align*}
+     g\circ f &= \Id{X} \\
+     f\circ g &= \Id{Y}.
+\end{align*}
+We say $f:X\to Y$ is \emph{invertible}, or an \emph{isomorphism} when it has an inverse map. We then write $f:X\To{\cong} Y$ or, when we wish to speak directly about the sets in consideration, we write $X\cong Y$ and say that ``$X$ is isomorphic to $Y$.'' This language allows us to formalize our remark about singleton sets: $\star\cong\mathbf{1}$; or in general any pair of sets of the same cardinality, e.g. $\BB\cong\mathbf{2}$.
+
+Just as map composition generalizes numeric addition and multiplication, map inverse generalizes additive and multiplicative inverse.
+\begin{align*}
+    (\square + n)\circ(\square + [-n]) &= \square + 0 \\
+    (\square \cdot n)\circ(\square \cdot n^{-1}) &= \square \cdot 1
+\end{align*}
+
+In other words: $(\square +n)^{-1}=(\square + [-n])$ and $(\square\cdot n)^{-1}=(\square\cdot n^{-1})$. This also sheds light on the adage ``you can't divide by 0"---the map $(\square\cdot 0)$ amounts to the rule $x\mapsto 0$, which is surely neither injective nor surjective, and hence non-invertible.
+
+This language inspires a reprisal of the fundamental theorems of calculus. We encode the derivative as $D:\mcC^\infty \to\mcC^\infty ::f\mapsto f'$, the integral as the map $I$ in Equation~(\ref{eqn:integral}), and the needed shifting adjustment as
+\[\sigma : \mcC^\infty \to \mcC^\infty :: f\mapsto \lambda x.[f(x)- f(0)].\]
+Then the first and second fundamental theorems can be rewritten as follows.
+\begin{align*}
+    I\circ D &= \sigma\\
+    D\circ I &= \Id{\mcC^\infty}
+\end{align*}
+These equations encode precisely how the derivative and integral are ``inverse'' to each other: $I$ is a right inverse but not a left inverse to $D$---it is however rather close to being a left inverse since it is only off by a shift. This shift is of course the consequence of the arbitrary constant that gets lost in the process of differentiating and hence, instead of being recovered, is replaced by a default constant $f(0)$.
+
+The preimage notion also facilitates a more algebraic repackaging of set-builder notation. We can consider a predicate $\mathbf{P}$ on $X$ as a map $\mathbf{P}:X\to\BB$, in which case we should write $\mathbf{P}(x)=\top$ in place of just $\mathbf{P}(x)$ for ``$x$ satisfies $\mathbf{P}$.'' In turn, this added detail allows us to encode the set as a preimage of $\top$ under $\mathbf{P}$:
+\[\mathbf{P}^*(\top)=\{x\in X\mid \mathbf{P}(x)=\top\}.\]
+Aside from aesthetics, why would one care to do this? This notation throws in relief the correspondence between logical and set theoretic constructions. We list some examples in the following table, whose first two columns correspond to the informal and symbolic logical expressions.
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c||c}
+         $P$ implies $Q$ & $P\Rightarrow Q$ & $P^*(\top)\subseteq Q^*(\top)$  \\
+         $P$ if and only if $Q$ & $P\Leftrightarrow Q$ & $P^*(\top)= Q^*(\top)$  \\
+         $P$ or $Q$ & $P\vee Q$ & $P^*(\top)\cup Q^*(\top)$ \\
+         $P$ and $Q$ & $P\wedge Q$ & $P^*(\top)\cap Q^*(\top)$
+    \end{tabular}
+    \label{tab:my_label}
+\end{table}
+
+Making these relations explicit in the notation can allow for more succinct proofs via immediate symbolic reasoning. I'm of the belief that a goal of mathematical notation should be the excising of indirect, seemingly necessary, verbal fillers like ``such that'' from one's inner monologue.
+
+We end the section by noting an important isomorphism.
+
+\begin{prop}\label{prop:subobjectclassifier}
+The following is an isomorphism
+\[\lambda \varphi.\varphi^*(\top):[X\to\BB]\to\mathcal{P}X.\]
+\end{prop}
+\begin{proof}
+The inverse of this map is given by the map $\top_{(-)}:\mathcal{P}X\to [X\to\BB]$, which maps a subset $S\subseteq X$ to the following so called \emph{indicator} map,
+\[\top_S : X\to\BB :: x\mapsto\begin{cases}\top & x\in S \\ \bot & x\notin S\end{cases}\]
+By construction $[\top_{S}]^*(\top)=S$ and $\top_{\varphi^*(\top)}=\varphi$.
+\end{proof}
+
