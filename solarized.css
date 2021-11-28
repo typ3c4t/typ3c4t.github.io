@@ -2,24 +2,26 @@ body {
     color: #839496;
     background-color: #002b36;
 }
+
 .document-title {
     /* document-title */
     color: #93a1a1;
     font-size: 130%;
     font-weight: bold;
 }
-.level-1 {
-    /* level-1 */
+
+.lvl1 {
+    /* lvl1 */
     color: #cb4b16;
     font-size: 130%;
 }
-.level-2 {
-    /* level-2 */
+.lvl2 {
+    /* lvl2 */
     color: #859900;
     font-size: 120%;
 }
-.level-3 {
-    /* level-3 */
+.lvl3 {
+    /* lvl3 */
     color: #268bd2;
     font-size: 114%;
 }
